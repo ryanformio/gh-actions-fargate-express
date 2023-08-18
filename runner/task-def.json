@@ -1,5 +1,4 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-1:551091399009:task-definition/expess-gh-actions-def:4",
     "containerDefinitions": [
         {
             "name": "github-runner",
@@ -14,7 +13,7 @@
                 },
                 {
                     "name": "RUNNER_TOKEN",
-                    "value": "<token>"
+                    "value": "<runner-token"
                 }
             ],
             "mountPoints": [],
@@ -30,37 +29,11 @@
             }
         }
     ],
-    "family": "expess-gh-actions-def",
-    "executionRoleArn": "arn:aws:iam::551091399009:role/ecsTaskExecutionRole",
+    "family": "task-defintion-gh-actions",
+    "executionRoleArn": "arn:aws:iam::123456789012:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 4,
     "volumes": [],
-    "status": "ACTIVE",
-    "requiresAttributes": [
-        {
-            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
-        },
-        {
-            "name": "ecs.capability.execution-role-awslogs"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
-        },
-        {
-            "name": "ecs.capability.task-eni"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
-        }
-    ],
     "placementConstraints": [],
-    "compatibilities": [
-        "EC2",
-        "FARGATE"
-    ],
     "requiresCompatibilities": [
         "FARGATE"
     ],
@@ -69,8 +42,5 @@
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
-    },
-    "registeredAt": "2023-08-18T18:48:44.153Z",
-    "registeredBy": "arn:aws:iam::1:user/johnsmith",
-    "tags": []
+    }
 }
