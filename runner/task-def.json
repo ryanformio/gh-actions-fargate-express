@@ -2,7 +2,7 @@
     "containerDefinitions": [
         {
             "name": "github-runner",
-            "image": "ryanformio/github-runner:0.0.4",
+            "image": "ryaneggz/github-runner",
             "cpu": 0,
             "portMappings": [],
             "essential": true,
@@ -13,7 +13,7 @@
                 },
                 {
                     "name": "RUNNER_TOKEN",
-                    "value": "<runner-token"
+                    "value": "<runner-token>"
                 }
             ],
             "mountPoints": [],
