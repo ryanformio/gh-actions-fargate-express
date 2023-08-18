@@ -1,0 +1,19 @@
+name: Express App Test
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test-express-app:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm run test

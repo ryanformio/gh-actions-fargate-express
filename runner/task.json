@@ -4,7 +4,7 @@
     "containerDefinitions": [
       {
         "name": "runner-container",
-        "image": "YOUR_DOCKER_IMAGE_URL_HERE",
+        "image": "node:14-slim",
         "cpu": 256,
         "memory": 512,
         "memoryReservation": 256,
@@ -12,14 +12,14 @@
         "environment": [
           {
             "name": "GITHUB_REPO_URL",
-            "value": "YOUR_REPO_URL"
+            "value": "https://github.com/ryanformio/gh-actions-fargate-express"
           }
         ],
         "logConfiguration": {
           "logDriver": "awslogs",
           "options": {
             "awslogs-group": "YOUR_LOG_GROUP_NAME",
-            "awslogs-region": "YOUR_AWS_REGION",
+            "awslogs-region": "us-east-1",
             "awslogs-stream-prefix": "github-runner"
           }
         }
