@@ -1,17 +1,26 @@
 FROM ubuntu:20.04
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-    curl \
-    git \
-    jq \
-&& rm -rf /var/lib/apt/lists/*
+# Prevent tzdata from prompting for timezone
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=America/Chicago
 
-# Setup GitHub Runner
-WORKDIR /actions-runner
-RUN curl -O -L https://github.com/actions/runner/releases/download/v2.278.0/actions-runner-linux-x64-2.278.0.tar.gz
-RUN tar xzf ./actions-runner-linux-x64-2.278.0.tar.gz
-RUN ./bin/installdependencies.sh
+# Install required packages
+RUN apt-get update && \
+    apt-get install -y curl sudo git jq libicu-dev && \
+    apt-get clean && \
+    ln -fs /usr/share/zoneinfo/$TZ /etc/localtime && \
+    dpkg-reconfigure --frontend noninteractive tzdata
 
-# Copy entrypoint script (explained below)
+# Add runner user
+RUN useradd -m runner && \
+    usermod -aG sudo runner && \
+    echo 'runner:runner' | chpasswd
+
+# Setup entrypoint
 COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+USER runner
+WORKDIR /home/runner
+
+ENTRYPOINT ["/entrypoint.sh"]
