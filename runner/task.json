@@ -1,34 +1,76 @@
 {
-    "family": "github-runner",
-    "networkMode": "awsvpc",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:551091399009:task-definition/expess-gh-actions-def:4",
     "containerDefinitions": [
-      {
-        "name": "runner-container",
-        "image": "node:14-slim",
-        "cpu": 256,
-        "memory": 512,
-        "memoryReservation": 256,
-        "essential": true,
-        "environment": [
-          {
-            "name": "GITHUB_REPO_URL",
-            "value": "https://github.com/ryanformio/gh-actions-fargate-express"
-          }
-        ],
-        "logConfiguration": {
-          "logDriver": "awslogs",
-          "options": {
-            "awslogs-group": "YOUR_LOG_GROUP_NAME",
-            "awslogs-region": "us-east-1",
-            "awslogs-stream-prefix": "github-runner"
-          }
+        {
+            "name": "github-runner",
+            "image": "ryanformio/github-runner:0.0.4",
+            "cpu": 0,
+            "portMappings": [],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "REPO_URL",
+                    "value": "https://github.com/ryanformio/gh-actions-fargate-express"
+                },
+                {
+                    "name": "RUNNER_TOKEN",
+                    "value": "<token>"
+                }
+            ],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/expess-gh-actions-def",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
         }
-      }
+    ],
+    "family": "expess-gh-actions-def",
+    "executionRoleArn": "arn:aws:iam::551091399009:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "revision": 4,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
     ],
     "requiresCompatibilities": [
-      "FARGATE"
+        "FARGATE"
     ],
-    "cpu": "256",
-    "memory": "512"
-  }
-  
+    "cpu": "1024",
+    "memory": "3072",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "registeredAt": "2023-08-18T18:48:44.153Z",
+    "registeredBy": "arn:aws:iam::1:user/johnsmith",
+    "tags": []
+}
