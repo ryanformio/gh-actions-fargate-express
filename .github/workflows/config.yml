@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+env:
+  NODE_VERSION: 18.x
+
 jobs:
   test-express-app:
     runs-on: self-hosted
